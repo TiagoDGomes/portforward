@@ -34,7 +34,7 @@ Begin VB.Form frmMain
    Begin VB.ListBox lstActive 
       Height          =   2985
       Left            =   225
-      TabIndex        =   7
+      TabIndex        =   4
       Top             =   1845
       Width           =   6945
    End
@@ -42,28 +42,28 @@ Begin VB.Form frmMain
       Caption         =   "Start"
       Height          =   375
       Left            =   5985
-      TabIndex        =   6
+      TabIndex        =   3
       Top             =   90
       Width           =   1140
    End
    Begin VB.TextBox txtRemoteHost 
       Height          =   300
       Left            =   2205
-      TabIndex        =   5
+      TabIndex        =   1
       Top             =   720
       Width           =   1725
    End
    Begin VB.TextBox txtRemotePort 
       Height          =   300
       Left            =   2205
-      TabIndex        =   4
+      TabIndex        =   2
       Top             =   1035
       Width           =   645
    End
    Begin VB.TextBox txtDestPort 
       Height          =   300
       Left            =   2205
-      TabIndex        =   3
+      TabIndex        =   0
       Top             =   135
       Width           =   645
    End
@@ -99,7 +99,7 @@ Begin VB.Form frmMain
       Height          =   240
       Index           =   2
       Left            =   225
-      TabIndex        =   2
+      TabIndex        =   7
       Top             =   1035
       Width           =   2040
    End
@@ -109,7 +109,7 @@ Begin VB.Form frmMain
       Height          =   240
       Index           =   1
       Left            =   225
-      TabIndex        =   1
+      TabIndex        =   6
       Top             =   720
       Width           =   2040
    End
@@ -119,7 +119,7 @@ Begin VB.Form frmMain
       Height          =   240
       Index           =   0
       Left            =   225
-      TabIndex        =   0
+      TabIndex        =   5
       Top             =   180
       Width           =   2040
    End
@@ -172,7 +172,7 @@ Private Sub wskListen_ConnectionRequest(ByVal requestID As Long)
     
     Call newRemoteConn.Connect
 
-    While Not newRemoteConn.State = MSWinsockLib.sckConnected And c < 1000
+    While Not newRemoteConn.State = MSWinsockLib.sckConnected And c < 32000
         DoEvents
         c = c + 1
     Wend
@@ -184,7 +184,7 @@ Private Sub wskListen_ConnectionRequest(ByVal requestID As Long)
         Call newLocalConn.Accept(requestID)
     Else
         Call newRemoteConn.Close
-        Call Unload(wskRemoteConn)
+        'Call Unload(wskRemoteConn)
         
     End If
     
